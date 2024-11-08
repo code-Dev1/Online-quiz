@@ -1,3 +1,5 @@
+<!-- Database connection -->
+ <?php include_once 'config/db_connection.php'; ?>
 <!-- header link meta tag and more  -->
 <?php include_once 'pages/user/common/header.php' ?>
 <!-- navbar  -->
@@ -13,7 +15,7 @@
           <div class="card-header">
             <h2 class="text-center">Sign Up</h2>
           </div>
-          <form action="">
+          <form action="signup.php" method='post'>
             <div class="card-body">
               <div class="form-floating border-bottom mb-3">
                 <input type="text" class="border-0 form-control" id="fullname" placeholder="Full Name" required>
@@ -51,6 +53,9 @@
   </div>
 </main>
 <!-- end main  -->
-<!-- start footer -->
+<?php 
+//Git data and save in database
 
+?>
+<!-- start footer -->
 <?php include_once 'pages/user/common/footer.php' ?>

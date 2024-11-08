@@ -2,15 +2,15 @@ CREATE DATABASE IF NOT EXISTS quizdb;
 USE quizdb;
 
 CREATE TABLE users (
-    uId		INT AUTO_INCREMENT PRIMARY KEY,
-	fullName 	VARCHAR(50) NOT NULL,
-    userName 	VARCHAR(50) NOT NULL UNIQUE,
-	email	 	VARCHAR(50) NOT NULL UNIQUE,
-	country		VARCHAR(50),
-	password	VARCHAR(255) NOT NULL,
-	role		ENUM('admin','tacher','user') DEFAULT 'user',
-	create_at	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	update_at 	TIMESTAMP
+    uId          INT AUTO_INCREMENT PRIMARY KEY,
+    fullName     VARCHAR(50) NOT NULL,
+    userName     VARCHAR(50) NOT NULL UNIQUE,
+    email        VARCHAR(50) NOT NULL UNIQUE,
+    country      VARCHAR(50),
+    password     VARCHAR(255) NOT NULL,
+    role         ENUM('admin', 'teacher', 'user') DEFAULT 'user',
+    create_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at    TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE quizCatacory (
