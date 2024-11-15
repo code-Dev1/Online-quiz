@@ -58,7 +58,7 @@
 if ($_SERVER['REQUEST_METHOD'] == "POST")
 {
   $fullname = $_POST['fullname'];
-  $username = $_POST['username'];
+  $username = strtolower(trim($_POST['username']));
   $email = $_POST['email'];
   $password = $_POST['password'];
 
@@ -72,8 +72,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
       if ($password !== $_POST['confirmPassword']) {
         die("Passwords do not match!");
       }
-    
 
+      try {
+        // test is exist username or email
+        $sql = "SELECT COUNT(*) FROM users WHERE userName = :username OR email = :email";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        if ($stmt->fetchColumn() > 1) {
+            die("Username or email already exists!");
+        }
+       
       // hash password
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
   $sql = "INSERT INTO users (fullName,userName,email,password) VALUES(:fullname, :username, :email, :password)";
@@ -83,12 +94,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
   $stmt->bindParam(':username', $username);
   $stmt->bindParam(':email', $email);
   $stmt->bindParam(':password', $hashedPassword);
-  if($stmt->execute()){
-      echo "Registration successful";
-  } else {
-      echo "Registration failed: " . implode(", ", $stmt->errorInfo());
-  }
+  if ($stmt->execute()) {
+          // Redirect to signin page
+          ?>
+            <script>
+              setTimeout(function() {
+                  window.location.href = "signin.php";
+              }, 0);
+            </script>
+          <?php
+          exit(); // Make sure no further code is executed after the redirect
+      } else {
+          echo "Registration failed: " . implode(", ", $stmt->errorInfo());
+      }
 } 
+catch (PDOException $e) {
+  echo "An error occurred: " . $e->getMessage();
+  
+}
+}
+
 ?>
 <!-- start footer -->
 <?php include_once 'pages/user/common/footer.php' ?>
