@@ -40,7 +40,7 @@
                     Message /Feedback
                     <span class="badge bg-danger ms-2">4</span>
                 </a>
-                <a class="nav-link" href="dashboard?page=">
+                <a class="nav-link" href="logout">
                     <div class="sb-nav-link-icon"><i class="fa fa-sign-out"></i></div>
                     Logout
                 </a>

@@ -12,6 +12,15 @@ $(document).ready(function () {
     $("#newPass").removeClass("d-none");
   });
   // forgit password page jquery end
+  window.setTimeout(function () {
+    $(".alert").slideUp(500);
+  }, 5000);
+  $("a.delete").click(function () {
+    var sure = window.confirm("Are you sure want to delete?");
+    if (!sure) {
+      event.preventDefault();
+    }
+  });
 });
 window.addEventListener("DOMContentLoaded", (event) => {
   // Toggle the side navigation
@@ -106,12 +115,12 @@ $(document).ready(function () {
     $("#typeUp").show();
   });
 
-  $(".img-pop").magnificPopup({
-    type: "image",
-    gallery: {
-      enabled: true,
-    },
-  });
+  // $(".img-pop").magnificPopup({
+  //   type: "image",
+  //   gallery: {
+  //     enabled: true,
+  //   },
+  // });
 });
 function pop(url, costom = "") {
   $("*#durl").attr("href", url);

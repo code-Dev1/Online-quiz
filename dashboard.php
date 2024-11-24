@@ -1,5 +1,9 @@
 <?php
 include_once __DIR__ . '/autoload.php';
+$auth = new Auth;
+if (!$auth->validateToken()) {
+    $auth->logout();
+}
 $san = new Sanitizer();
 $page = 'home';
 if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -144,7 +148,7 @@ $include_path = __DIR__ . '/pages/admin/' . $page . '.php';
     <script src="Assets/js/bootstrap.min.js"></script>
     <script src="Assets/js/jquery.magnific-popup.min.js"></script>
     <script src="Assets/js/script.js"></script>
-    <script src="Assets/js/main.js"></script>
+    <!-- <script src="Assets/js/main.js"></script> -->
 </body>
 
 </html>
