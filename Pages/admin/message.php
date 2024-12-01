@@ -1,3 +1,8 @@
+<?php
+$message = new Message;
+$rows = $message->index();
+?>
+
 <h3 class="font-monospace mt-3">Message / Feedback</h3>
 <div class="border rounded-3 my-4">
     <div class="mx-md-5">
@@ -10,26 +15,19 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Ali</td>
-                    <td>Sender1@email.com</td>
-                    <td><span class="badge bg-danger fs-6">New</span></td>
-                    <td>
-                        <a href="dashboard?page=viewmessage" class="btn btn-success">View</a>
-                        <button onclick="pop('dashboard?page=catagroyDelete&c_id=1','message')" popovertarget="my" id="showBtn" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ahamd</td>
-                    <td>Sender2@email.com</td>
-                    <td><span class="badge bg-success fs-6">Readed</span></td>
-                    <td>
-                        <a href="dashboard?page=viewmessage" class="btn btn-success">View</a>
-                        <button onclick="pop('dashboard?page=catagroyDelete&c_id=2','message')" popovertarget="my" id="showBtn" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+                <?php $x = 1;
+                foreach ($rows as $row): ?>
+                    <tr>
+                        <td><?= $x++ ?></td>
+                        <td><?= $row->senderName ?></td>
+                        <td><?= $row->senderEmail ?></td>
+                        <td><span class="badge <?= ($row->status == 0) ? 'bg-success' : 'bg-danger' ?> fs-6"><?= ($row->status == 0) ? 'Reded' : 'New' ?></span></td>
+                        <td>
+                            <a href="dashboard?page=viewMessage&mid=<?= $row->mId ?>" class="btn btn-success">View</a>
+                            <button onclick="pop('dashboard?page=deleteMessage&mid=<?= $row->mId ?>','message')" popovertarget="my" id="showBtn" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

@@ -9,22 +9,23 @@ class Auth extends  Database
 
     public function checkCookie()
     {
-        if (isset($_COOKIE['authTokenQ'])) {
-
+        if (isset($_COOKIE['quizToken'])) {
             $result = $this->validateCookie();
             if (!$result) {
                 return false;
             }
-            $cookie = $_COOKIE['authTokenQ'];
+            $cookie = $_COOKIE['quizToken'];
             $cookie = hex2bin($cookie);
             $explode = explode(',', $cookie);
             $username = $explode[0];
+
             $token = $this->generateToken($username);
             $_SESSION['auth_token'] = $token;
             header("location:dashboard?page=home");
             die;
         }
     }
+
     public function login($formData)
     {
         $data = Sanitizer::sanitize($formData);
@@ -49,7 +50,7 @@ class Auth extends  Database
         Semej::set("success", "", "Login successfully.");
         $result = $result['0'];
         $_SESSION['auth_user'] = [
-            "id" => $result->id,
+            "id" => $result->uid,
             "user" => $result->username,
             "role" => $result->role
 
@@ -61,15 +62,17 @@ class Auth extends  Database
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
             $agentUser = $username . "," . $userAgent;
             $cookie = bin2hex($agentUser);
-            setcookie("authTokenQ", $cookie, time() + 2592000, "/", "", false, true);
+            setcookie("quizToken", $cookie, time() + 2592000, "/", "", false, true);
         }
         header("location:dashboard?page=home");
     }
+
     public function generateToken($auth_user)
     {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         return sha1(SALT . $auth_user . $user_agent);
     }
+
     public function validateToken()
     {
         if (!isset($_SESSION)) {
@@ -86,12 +89,13 @@ class Auth extends  Database
         }
         return true;
     }
+
     public function validateCookie()
     {
-        if (!isset($_COOKIE['authTokenQ'])) {
+        if (!isset($_COOKIE['quizToken'])) {
             return false;
         }
-        $cookie = $_COOKIE['authTokenQ'];
+        $cookie = $_COOKIE['quizToken'];
         $username = hex2bin($cookie);
         $explode = explode(",", $username);
         $username = $explode[0];
@@ -100,7 +104,7 @@ class Auth extends  Database
         if ($cookie !== $generateCookie) {
             return false;
         }
-        $sql = "SELECT id,username,role  FROM users WHERE username = ?";
+        $sql = "SELECT uid,username,role  FROM users WHERE username = ?";
         $params = [
             $username
         ];
@@ -108,19 +112,30 @@ class Auth extends  Database
         if (count($result) != 1) {
             return false;
         }
+
         $result = $result[0];
         $_SESSION['auth_user'] = [
-            'id' => $result->id,
+            'id' => $result->uid,
             'user' => $result->username,
             'role' => $result->role
         ];
         return true;
     }
+
     public function logout()
     {
         session_unset();
         session_destroy();
-        setcookie("authTokenQ", "", time() - 2592000, "/", "", false, true);
+        setcookie("quizToken", "", time() - 2592000, "/", "", false, true);
         header("location:signin");
+    }
+
+    public function authRole($role)
+    {
+        $chackRole = $_SESSION['auth_user']['role'];
+        if ($chackRole !== $role) {
+            return false;
+        }
+        return true;
     }
 }

@@ -35,6 +35,10 @@
                     <div class="sb-nav-link-icon"><i class="fa fa-check-circle-o"></i></div>
                     Quiz Type
                 </a>
+                <a class="nav-link  <?= (isset($_GET['page']) && ($_GET['page'] == 'users' || $_GET['page'] == 'viewmessage')) ? 'active' : '' ?>" href="dashboard?page=users">
+                    <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                    Users
+                </a>
                 <a class="nav-link  <?= (isset($_GET['page']) && ($_GET['page'] == 'message' || $_GET['page'] == 'viewmessage')) ? 'active' : '' ?>" href="dashboard?page=message">
                     <div class="sb-nav-link-icon"><i class="fa fa-chain"></i></div>
                     Message /Feedback

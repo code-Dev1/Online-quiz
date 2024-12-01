@@ -12,9 +12,9 @@ if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 
 <!-- header link meta tag and more  -->
 <!-- navbar  -->
-<?php include_once 'pages/user/common/navbar.php' ?>
+<!-- <?php include_once 'pages/user/common/navbar.php' ?> -->
 <!-- page header -->
-<header class="header-img" style="background-image: url(Assets/images/home-bg.jpg); height: 10rem;"></header>
+<!-- <header class="header-img" style="background-image: url(Assets/images/home-bg.jpg); height: 10rem;"></header> -->
 <!-- start main  -->
 <main class="mt-5 mb-5">
   <div class="container px-4 px-lg-5 mt-5 mb-5">
@@ -65,4 +65,4 @@ if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 <!-- end main  -->
 <!-- start footer -->
 
-<?php include_once 'pages/user/common/footer.php' ?>
+<!-- <?php include_once 'pages/user/common/footer.php' ?> -->

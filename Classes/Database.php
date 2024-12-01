@@ -35,7 +35,7 @@ class Database
                 }
             }
             $stmt->execute();
-            if (str_starts_with($sql, "SELECT")) {
+            if (str_starts_with($sql, "SELECT") || str_starts_with($sql, "SHOW")) {
                 $result = $stmt->fetchAll(PDO::FETCH_OBJ);
             } else {
                 $result = $stmt->rowCount();
@@ -44,6 +44,10 @@ class Database
         } catch (Exception $e) {
             return "Server error" . $e->getMessage();
         }
+    }
+    public function lastInsertedId()
+    {
+        return $this->con->lastInsertId();
     }
 }
 $db = new Database;

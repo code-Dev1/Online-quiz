@@ -1,3 +1,9 @@
+<?php
+$score = new UserAnswer;
+$cat = new Catagory;
+$catRows = $cat->index();
+$rows = $score->index();
+?>
 <h3 class="font-monospace mt-3">Dashboard</h3>
 <div class="border rounded-3 my-4" style="height: 200px;">
     <div>
@@ -5,14 +11,11 @@
         <hr>
         <form action="">
             <div class="px-4">
-                <select name="" id="chooseCatagory" class="form-select">
+                <select name="frm[catagory]" id="chooseCatagory" class="form-select">
                     <option value="">Choose catagory</option>
-                    <option value="">Islamic</option>
-                    <option value="">Physics</option>
-                    <option value="">History</option>
-                    <option value="">Network</option>
-                    <option value="">Porgramming</option>
-                    <option value="">Computer Fundamental</option>
+                    <?php foreach ($catRows as $row): ?>
+                        <option value="<?= $row->cId ?>"><?= $row->title ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="p-4 d-flex justify-content-center">
@@ -36,41 +39,16 @@
                 <th>Date</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Islamic</td>
-                    <td>Multichoose</td>
-                    <td>9</td>
-                    <td>today</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Islamic</td>
-                    <td>Multichoose</td>
-                    <td>9</td>
-                    <td>today</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Islamic</td>
-                    <td>Multichoose</td>
-                    <td>9</td>
-                    <td>today</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Islamic</td>
-                    <td>Multichoose</td>
-                    <td>9</td>
-                    <td>today</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Islamic</td>
-                    <td>Multichoose</td>
-                    <td>9</td>
-                    <td>today</td>
-                </tr>
+                <?php $x = 1;
+                foreach ($rows as $row): ?>
+                    <tr>
+                        <td><?= $x++ ?></td>
+                        <td><?= $row->title ?></td>
+                        <td><?= $row->type ?></td>
+                        <td><?= $row->scores ?></td>
+                        <td><?= dates($row->attemptDate) ?></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

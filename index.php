@@ -1,3 +1,27 @@
+<?php
+require_once 'autoload.php';
+$user = new User;
+$quiz = new Quizzes;
+$catagory = new Catagory;
+$score = new UserAnswer;
+$rows = $score->topUsers();
+$userRseult = $user->totleUser();
+$teacherResult = $user->totleTeacher();
+$quizResult = $quiz->totleQuiz();
+$catResult = $catagory->totleCatagory();
+$cat = $catagory->indexCatagory();
+
+if (isset($_POST['sub'])) {
+  $auth = new Auth;
+  $result = $auth->checkCookie();
+  if (!$result) {
+    header('location:signIn');
+    die;
+  } else {
+    header('location:dashboard?page=home');
+  }
+}
+?>
 <!-- header link meta tag and more  -->
 <?php include_once 'pages/user/common/header.php' ?>
 <!-- navbar  -->
@@ -10,7 +34,10 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
           <div class="page-header">
             <span class="text-light fs-2 text-center font-monospace text-uppercase">can you answored our quiz ?</span>
-            <a href="dashboard.php" class="mt-3 btn btn-outline-light">Let's Start ></a>
+            <form action="" method="post">
+              <input type="submit" name="sub" class="mt-3 btn btn-outline-light" value="Let's Start >">
+              <!-- <a name=" sub" href="dashboard?phge=home" class="mt-3 btn btn-outline-light" type="button">Let's Start ></a> -->
+            </form>
           </div>
         </div>
       </div>
@@ -27,115 +54,33 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-3 my-lg-5">
-        <div class="cards">
-          <div class="front">
-            <div class="card shadow">
-              <img src="Assets/images/3.jpg" alt="" class="card-img img-fluid">
-              <div class="card-body">
-                <p>LOREM</p>
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,</span>
+      <?php foreach ($cat as $val): ?>
+        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-3 my-lg-5">
+          <div class="cards">
+            <div class="front">
+              <div class="card shadow">
+                <img src="<?= $val->image ?>" alt="" class="card-img img-fluid">
+                <div class="card-body">
+                  <p><b><?= $val->title ?></b></p>
+                  <span><?= mb_strimwidth($val->description, 0, 30, "....") ?></span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="back">
-            <div class="card shadow card-w overflow-hidden">
-              <div class="card-body row text-center align-items-center">
-                <h3>LOREM</h3>
-                <hr>
-                <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit blanditiis saepe, fugiat
-                  sapiente nesciunt facere nisi, vitae necessitatibus maiores, suscipit cumque minima quod vel neque
-                  illo deserunt at odio esse! Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
-                <div>
-                  <a href="dashboard" class="w-50 btn btn-outline-dark">Let's Start ></a>
+            <div class="back">
+              <div class="card shadow card-w overflow-hidden">
+                <div class="card-body row text-center align-items-center">
+                  <h3><?= strtoupper($val->title) ?></h3>
+                  <hr>
+                  <span><?= $val->description ?></span>
+                  <div>
+                    <a href="dashboard" class="w-50 btn btn-outline-dark">Let's Start ></a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-3 my-lg-5">
-        <div class="cards">
-          <div class="front">
-            <div class="card shadow">
-              <img src="Assets/images/5.jpg" alt="" class="card-img img-fluid">
-              <div class="card-body">
-                <p>LOREM</p>
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,</span>
-              </div>
-            </div>
-          </div>
-          <div class="back">
-            <div class="card shadow card-w overflow-hidden">
-              <div class="card-body row text-center align-items-center">
-                <h3>LOREM</h3>
-                <hr>
-                <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit blanditiis saepe, fugiat
-                  sapiente nesciunt facere nisi, vitae necessitatibus maiores, suscipit cumque minima quod vel neque
-                  illo deserunt at odio esse! Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
-                <div>
-                  <a href="dashboard" class="w-50 btn btn-outline-dark">Let's Start ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-3 my-lg-5">
-        <div class="cards">
-          <div class="front">
-            <div class="card shadow">
-              <img src="Assets/images/6.jpg" alt="" class="card-img img-fluid">
-              <div class="card-body">
-                <p>LOREM</p>
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,</span>
-              </div>
-            </div>
-          </div>
-          <div class="back">
-            <div class="card shadow card-w overflow-hidden">
-              <div class="card-body row text-center align-items-center">
-                <h3>LOREM</h3>
-                <hr>
-                <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit blanditiis saepe, fugiat
-                  sapiente nesciunt facere nisi, vitae necessitatibus maiores, suscipit cumque minima quod vel neque
-                  illo deserunt at odio esse! Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
-                <div>
-                  <a href="dashboard" class="w-50 btn btn-outline-dark">Let's Start ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-3 my-lg-5">
-        <div class="cards">
-          <div class="front">
-            <div class="card shadow">
-              <img src="Assets/images/4.jpg" alt="" class="card-img img-fluid">
-              <div class="card-body">
-                <p>LOREM</p>
-                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum,</span>
-              </div>
-            </div>
-          </div>
-          <div class="back">
-            <div class="card shadow card-w overflow-hidden">
-              <div class="card-body row text-center align-items-center">
-                <h3>LOREM</h3>
-                <hr>
-                <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit blanditiis saepe, fugiat
-                  sapiente nesciunt facere nisi, vitae necessitatibus maiores, suscipit cumque minima quod vel neque
-                  illo deserunt at odio esse! Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
-                <div>
-                  <a href="dashboard" class="w-50 btn btn-outline-dark">Let's Start ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <?php endforeach; ?>
     </div>
   </section>
   <!-- best suore section start -->
@@ -148,46 +93,24 @@
       <thead>
         <th>#NO</th>
         <th>Full Name</th>
+        <th>Country</th>
         <th>Date</th>
         <th>Score</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Shahzada Mohammadi</td>
-          <td>2024/7/2</td>
-          <td>9.44</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Shahzada Mohammadi</td>
-          <td>2024/7/2</td>
-          <td>9.44</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Shahzada Mohammadi</td>
-          <td>2024/7/2</td>
-          <td>9.44</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Shahzada Mohammadi</td>
-          <td>2024/7/2</td>
-          <td>9.44</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Shahzada Mohammadi</td>
-          <td>2024/7/2</td>
-          <td>9.44</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Shahzada Mohammadi</td>
-          <td>2024/7/2</td>
-          <td>9.44</td>
-        </tr>
+        <?php $x = 1;
+        foreach ($rows as $row): ?>
+          <tr>
+            <td><?= $x++ ?></td>
+            <td><?= $row->fullName ?></td>
+            <td><?= $row->country ?></td>
+            <td><?= $row->scores ?></td>
+            <?php $t = strtotime($row->date);
+            $d = time() - $t;
+            $day = floor($d / (60 * 60 * 24)) ?>
+            <td><?= ($day != 0) ? ($day == 1) ? $day . ' ago' : $day . 's ago'  : 'Today'  ?></td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </section>
@@ -197,25 +120,25 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="text-light p-2 text-center waypoint">
             <h1 class="display-5 fw-normal mb-4 font-monospace">Users</h1>
-            <p class="fs-3 counter" data-target="23423423">23423423</p>
+            <p class="fs-3 counter" data-target="<?= $userRseult[0]->id ?>"><?= $userRseult[0]->id ?></p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="text-light p-2 text-center single-counter">
             <h1 class="display-5 fw-normal mb-4 font-monospace">Category</h1>
-            <p class="fs-3 counter" data-target="234">23423423</p>
+            <p class="fs-3 counter" data-target="<?= $catResult[0]->id ?>"><?= $catResult[0]->id ?></p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="text-light p-2 text-center single-counter">
             <h1 class="display-5 fw-normal mb-4 font-monospace">Questions</h1>
-            <p class="fs-3 counter" data-target="23432323423">23423423</p>
+            <p class="fs-3 counter" data-target="<?= $quizResult[0]->id ?>"><?= $quizResult[0]->id ?></p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="text-light p-2 text-center single-counter">
             <h1 class="display-5 fw-normal mb-4 font-monospace">Teachers</h1>
-            <p class="fs-3 counter" data-target="2323">23423423</p>
+            <p class="fs-3 counter" data-target="<?= $teacherResult[0]->id ?>"><?= $teacherResult[0]->id ?></p>
           </div>
         </div>
       </div>
@@ -225,4 +148,5 @@
 
 <!-- main end -->
 <!-- start footer -->
+<script src="Assets/js/counter.js"></script>
 <?php include_once 'pages/user/common/footer.php' ?>

@@ -3,10 +3,11 @@
 
 <?php
 
-require_once 'autoLoad.php';
+require_once 'autoload.php';
 
 $auth = new Auth;
 $auth->checkCookie();
+
 if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 
   $formData = $_POST['frm'];
@@ -15,15 +16,15 @@ if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 ?>
 
 <!-- navbar  -->
-<?php include_once 'pages/user/common/navbar.php' ?>
+<!-- <?php include_once 'pages/user/common/navbar.php' ?> -->
 <!-- page header -->
 
-<header class="header-img" style="background-image: url(Assets/images/home-bg.jpg); height: 10rem;"></header>
+<!-- <header class="header-img" style="background-image: url(Assets/images/home-bg.jpg); height: 10rem;"></header> -->
 <!-- start main  -->
 <main class="mt-5 mb-5">
   <div class="container px-4 px-lg-5 mt-5 mb-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
-      <div class="col-md-10 col-lg-8 col-xl-7 mb-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center mt-5 mb-5">
+      <div class="col-md-10 col-lg-8 col-xl-7 mt-5">
         <div class="card shadow mt-5 mb-5">
           <div class="card-header">
             <h2 class="text-center">Sign In</h2>
@@ -60,4 +61,4 @@ if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === "POST") {
 </main>
 <!-- end main  -->
 <!-- start footer -->
-<?php include_once 'pages/user/common/footer.php' ?>
+<!-- <?php include_once 'pages/user/common/footer.php' ?> -->

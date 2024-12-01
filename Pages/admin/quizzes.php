@@ -1,3 +1,8 @@
+<?php
+$quiz = new Quizzes;
+$rows = $quiz->index();
+?>
+
 <h3 class="font-monospace mt-3">Quizzes</h3>
 <a href="dashboard?page=addquestion" class="btn btn-info mt-3">Add Question</a>
 <!-- write content between this div -->
@@ -13,28 +18,21 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>What's computer ?</td>
-                    <td><span class="badge bg-primary fs-6">Computer</span></td>
-                    <td><span class="badge bg-success fs-6">Ture / False</span></td>
-                    <td>
-                        <a href="dashboard?page=viewquestion&q_id=1" class="btn btn-success">View</a>
-                        <a href="dashboard?page=updatequestion&q_id=1" class="btn btn-info">Update</a>
-                        <button onclick="pop('dashboard?page=quizDelete&q_id=1','question')" popovertarget="my" id="showBtn" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>What's computer ?</td>
-                    <td><span class="badge bg-primary fs-6">Computer</span></td>
-                    <td><span class="badge bg-warning fs-6">Multichoose</span></td>
-                    <td>
-                        <a href="dashboard?page=viewquestion&q_id=2" class="btn btn-success">View</a>
-                        <a href="dashboard?page=updatequestion&q_id=2" class="btn btn-info">Update</a>
-                        <button onclick="pop('dashboard?page=quizDelete&q_id=2','question')" popovertarget="my" id="showBtn" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
+                <?php $x = 1;
+                foreach ($rows as $row):
+                ?>
+                    <tr>
+                        <td><?= $x++ ?></td>
+                        <td><?= $row->question ?></td>
+                        <td><span class="badge bg-primary fs-6"><?= $row->title ?></span></td>
+                        <td><span class="badge bg-success fs-6"><?= $row->type ?></span></td>
+                        <td>
+                            <a href="dashboard?page=viewquestion&qid=<?= $row->qId ?>" class="btn btn-success">View</a>
+                            <a href="dashboard?page=updatequestion&qid=<?= $row->qId ?>" class="btn btn-info">Update</a>
+                            <button onclick="pop('dashboard?page=deleteQuestion&qid=<?= $row->qId ?>','question')" popovertarget="my" id="showBtn" class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
             </tbody>
         </table>
     </div>

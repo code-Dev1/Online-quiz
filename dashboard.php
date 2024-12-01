@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/autoload.php';
 $auth = new Auth;
+
 if (!$auth->validateToken()) {
     $auth->logout();
 }
@@ -37,6 +38,7 @@ $include_path = __DIR__ . '/pages/admin/' . $page . '.php';
     <link href="Assets/css/bootstrap.css" rel="stylesheet" />
     <link href="Assets/css/magnific-popup.css" rel="stylesheet" />
     <link href="Assets/css/style.css" rel="stylesheet" />
+    <script src="Assets/js/jquery.min.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -48,7 +50,9 @@ $include_path = __DIR__ . '/pages/admin/' . $page . '.php';
             <main>
                 <div class="container-fluid px-4">
                     <!-- write content between this div -->
-                    <?php include_once $include_path ?>
+                    <?php
+                    "<div class='mt-5'>" . Semej::show() . "</div>";
+                    include_once $include_path ?>
                 </div>
             </main>
         </div>
@@ -72,79 +76,6 @@ $include_path = __DIR__ . '/pages/admin/' . $page . '.php';
         </div>
     </div>
     <!-- pop div for delete end -->
-    <!-- pop div for updata start -->
-    <?php
-    function update($table, $id)
-    {
-        $type = [];
-        if ($table == 'type') {
-            $type = [
-                'id' => $id,
-                'title' => 'title 1',
-                'table' => 'type'
-            ];
-        } else {
-            $type = [
-                'id' => $id,
-                'title' => 'title 2',
-                'table' => 'catagory'
-            ];
-        }
-        return $type;
-    }
-    ?>
-    <!-- type update pop div start-->
-    <div id="typeUp" popover class="pop">
-        <div class="pop-content">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">Update quiz type.
-                    <button id="closeTypeUp" class="btn"><i class=" fa fa-close"></i></button>
-                </div>
-                <div class="card-body">
-                    <div class="row justify-content-around">
-                        <form action="">
-                            <div class="input-group mb-3">
-                                <label for="" class="input-group-text">Title</label>
-                                <input type="text" class="form-control" value="<?= (isset($a)) ? $a['title'] : '' ?>" name="title">
-                            </div>
-                            <input type="submit" value="Update" class="btn btn-success w-100">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- type update pop div end-->
-    <!-- catagory update pop div start-->
-    <div id="catagoryUp" popover class="pop">
-        <div class="pop-content">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">update quiz catagory.
-                    <button id="closeCatagoryUp" class="btn"><i class=" fa fa-close"></i></button>
-                </div>
-                <div class="card-body">
-                    <div class="row justify-content-around">
-                        <form action="">
-                            <div class="input-group mb-3">
-                                <label for="" class="input-group-text">Title</label>
-                                <input type="text" class="form-control" name="title">
-                            </div>
-                            <div class="input-group mb-3">
-                                <textarea name="" id="" class="form-control" placeholder="Description" rows="10"></textarea>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="file" class="form-control" name="title">
-                            </div>
-                            <input type="submit" value="Add" class="btn btn-success w-100">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- catagory update pop div end-->
-
-    <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
     <script src="Assets/js/jquery.magnific-popup.min.js"></script>
     <script src="Assets/js/script.js"></script>

@@ -1,5 +1,11 @@
 <!-- header link meta tag and more  -->
 <?php include_once 'pages/user/common/header.php' ?>
+<?php
+if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+  $message = new Message;
+  $message->add($_POST['frm']);
+}
+?>
 <!-- navbar  -->
 <?php include_once 'pages/user/common/navbar.php' ?>
 <!-- page header -->
@@ -22,21 +28,22 @@
   <div class="container px-4 px-lg-5 mb-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
-        <form action="">
+        <?php Semej::show() ?>
+        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
           <div class="form-floating mb-3 border-bottom">
-            <input type="text" class="form-control border-0" id="name" placeholder="Name" required>
+            <input name="frm[name]" type="text" class="form-control border-0" id="name" placeholder="Name" required>
             <label for="name">Name</label>
           </div>
           <div class="form-floating mb-3 border-bottom">
-            <input type="Email" class="form-control border-0" id="email" placeholder="Email" required>
-            <label for="name">Email</label>
+            <input name="frm[email]" type="Email" class="form-control border-0" id="email" placeholder="Email" required>
+            <label for="email">Email</label>
           </div>
           <div class="form-floating mb-2 border-bottom">
-            <textarea name="" class="border-0 form-control" id="message" placeholder="Enter your message here"
+            <textarea name="frm[message]" class="border-0 form-control" id="message" placeholder="Enter your message here"
               style="height:12rem" required></textarea>
             <label for="message">Message</label>
           </div>
-          <input type="submit" class="btn btn-dark text-uppercase float-end" value="Send">
+          <input name="sub" type="submit" class="btn btn-dark text-uppercase float-end" value="Send">
         </form>
       </div>
     </div>
