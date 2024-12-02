@@ -107,7 +107,7 @@ class User extends Database
             $password,
             $data['role']
         ];
-        $sql = "INSERT INTO users (fullName,userName,email,country,password,roels) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO users (fullName,userName,email,country,password,role) VALUES (?,?,?,?,?,?)";
         $result = $this->exStatment($sql, $params);
         if ($result != 1) {
             Semej::set('danger', '', 'User registertion failed please try agin later.');

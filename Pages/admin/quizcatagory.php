@@ -1,5 +1,8 @@
 <?php
-
+if (!$auth->authRole('teacher')) {
+    header('location:dashboard?page=404');
+    die;
+}
 $catagory = new Catagory;
 if (isset($_POST['update']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];

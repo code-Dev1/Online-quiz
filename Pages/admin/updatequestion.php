@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('teacher')) {
+    header('location:dashboard?page=404');
+    die;
+}
 $quiz = new Quizzes;
 if (isset($_GET['qid'])) {
     if (!empty($_GET['qid'])) {

@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('teacher')) {
+    header('location:dashboard?page=404');
+    die;
+}
 $type = new QuizType;
 $rows = $type->index();
 

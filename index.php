@@ -18,7 +18,7 @@ if (isset($_POST['sub'])) {
     header('location:signIn');
     die;
   } else {
-    header('location:dashboard?page=home');
+   header('location:page');die;
   }
 }
 ?>

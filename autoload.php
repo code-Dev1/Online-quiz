@@ -20,6 +20,7 @@ function dates($date)
 {
     $t = strtotime($date);
     $d = time() - $t;
+    var_dump($d);
     $day = floor($d / (60 * 60 * 24));
     echo ($day != 0) ? ($day == 1) ? $day . ' day ago' : $day . ' days ago'  : 'Today';
 }

@@ -3,22 +3,22 @@ include_once __DIR__ . '/autoload.php';
 $auth = new Auth;
 
 if (!$auth->validateToken()) {
-    $auth->logout();
+    $auth->logout();die;
 }
+$page ='404';
 $san = new Sanitizer();
-$page = 'home';
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $page = $san->sanitize($_GET['page']);
     $page = basename($page);
     $page_explode = explode('.', $page);
     $page = $page_explode[0];
     if (!file_exists("pages/admin/" . $page . ".php")) {
-        $page = 'home';
-        $active = 'active';
+        $page = '404';
+        // $active = 'active';
     }
 } else {
-    $page = 'home';
-    $active = 'active';
+    $page = '404';
+    // $active = 'active';
 }
 $include_path = __DIR__ . '/pages/admin/' . $page . '.php';
 ?>

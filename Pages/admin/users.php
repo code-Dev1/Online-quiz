@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('admin')) {
+    header('location:dashboard?page=404');
+    die;
+}
 $user = new User;
 $rows = $user->index();
 if (isset($_POST['sub']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
