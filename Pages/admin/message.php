@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('admin')) {
+    header('location:dashboard?page=404');
+    die;
+}
 $message = new Message;
 $rows = $message->index();
 ?>

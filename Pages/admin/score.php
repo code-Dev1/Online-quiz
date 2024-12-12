@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('user')) {
+    header('location:dashboard?page=404');
+    die;
+}
 $score = new UserAnswer;
 $rows = $score->index();
 $totle = $score->totleScore();

@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('teacher')) {
+    header('location:dashboard?page=404');
+    die;
+}
 if (isset($_GET['qid'])) {
     if (!empty($_GET['qid'])) {
         $id = $_GET['qid'];

@@ -133,7 +133,7 @@ class Auth extends  Database
     public function authRole($role)
     {
         $chackRole = $_SESSION['auth_user']['role'];
-        if ($chackRole !== $role) {
+        if ($chackRole != $role) {
             return false;
         }
         return true;

@@ -1,4 +1,8 @@
 <?php
+if (!$auth->authRole('admin')) {
+    header('location:dashboard?page=404');
+    die;
+}
 if (isset($_GET['mid'])) {
     if (!empty($_GET['mid'])) {
         $id = $_GET['mid'];
