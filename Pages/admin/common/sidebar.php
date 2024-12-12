@@ -3,7 +3,11 @@
         <div class="sb-sidenav-menu">
             <div class="nav mt-4">
                 <?php if ($auth->authRole('user')): ?>
+<<<<<<< HEAD
                     <a class="nav-link <?= $active ?>" href="dashboard">
+=======
+                    <a class="nav-link <?= $active ?>" href="dashboard?page=home">
+>>>>>>> c80b9d040e650d16f6f1412691fe5acf55eca50a
                         <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
                         Dashboard
                     </a>

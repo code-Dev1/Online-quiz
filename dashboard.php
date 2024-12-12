@@ -3,10 +3,14 @@ include_once __DIR__ . '/autoload.php';
 $auth = new Auth;
 
 if (!$auth->validateToken()) {
-    $auth->logout();
+    $auth->logout();die;
 }
+$page ='404';
 $san = new Sanitizer();
+<<<<<<< HEAD
 $page = '404';
+=======
+>>>>>>> c80b9d040e650d16f6f1412691fe5acf55eca50a
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $page = $san->sanitize($_GET['page']);
     $page = basename($page);

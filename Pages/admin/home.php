@@ -44,6 +44,13 @@ $rows = $score->index();
             </thead>
             <tbody>
                 <?php $x = 1;
+                if(count($rows) == 0):
+                 ?>
+                 <tr>
+                    <td colspan="5">Row not exsit</td>
+                 </tr>
+                 <?php
+                 else:
                 foreach ($rows as $row): ?>
                     <tr>
                         <td><?= $x++ ?></td>
@@ -52,7 +59,9 @@ $rows = $score->index();
                         <td><?= $row->scores ?></td>
                         <td><?= dates($row->attemptDate) ?></td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endforeach; 
+                endif
+                ?>
             </tbody>
         </table>
     </div>

@@ -21,7 +21,7 @@ class Auth extends  Database
 
             $token = $this->generateToken($username);
             $_SESSION['auth_token'] = $token;
-            header("location:dashboard?page=home");
+            header("location:page");
             die;
         }
     }
@@ -64,7 +64,7 @@ class Auth extends  Database
             $cookie = bin2hex($agentUser);
             setcookie("quizToken", $cookie, time() + 2592000, "/", "", false, true);
         }
-        header("location:dashboard?page=home");
+        header("location:page");
     }
 
     public function generateToken($auth_user)

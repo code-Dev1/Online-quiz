@@ -18,6 +18,7 @@ if (isset($_POST['sub'])) {
     header('location:signIn');
     die;
   } else {
+<<<<<<< HEAD
     $role = $_SESSION['auth_user']['role'];
     if ($role == 'user') {
       header('location:dashboard?page=home');
@@ -32,6 +33,9 @@ if (isset($_POST['sub'])) {
       header('location:dashboard?page=dashbord-teacher');
       die;
     }
+=======
+   header('location:page');die;
+>>>>>>> c80b9d040e650d16f6f1412691fe5acf55eca50a
   }
 }
 ?>
